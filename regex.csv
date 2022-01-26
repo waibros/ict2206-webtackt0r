@@ -1,0 +1,3 @@
+attack_name,attack_query
+SQL Injection Test,%27
+XSS Test,%3Cscript%3Ealert%28%22[a-z]+%22%29%3C%2Fscript%3E
