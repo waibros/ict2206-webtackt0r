@@ -12,7 +12,7 @@ def main():
 
     # supports file and directory input
     if os.path.isfile(log_input):
-        with open("access.log", 'r') as log_file:
+        with open(log_input, 'r') as log_file:
             log_entries = log_file.readlines()
     elif os.path.isdir(log_input):
         log_entries = folder_input(log_input)
@@ -25,6 +25,7 @@ def main():
             regex_db.append(row)
 
     # Loops through each log entry and match it against the regex in the regex database
+    # TO-DO: Change logic. Currently, 1 entry matching multiple regex is being printed multiple time even though only 1 entry.
     for entry in log_entries:
         for regex_query in regex_db:
             match = re.search(regex_query[1], entry)

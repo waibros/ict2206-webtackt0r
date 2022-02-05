@@ -1,3 +1,4 @@
 attack_name,attack_query
-SQL Injection Test,%27
+[SQL INJECTION] SQL statement keywords detected!,(FROM(\+|%20)dual|SELECT|NULL|ORDER(\+|%20)BY|UNION(\+|%20)(ALL)?).+(--(\+|%20)|%23)?
+[SQL INJECTION] Database enumeration,v$version|v$instance|@@version|version\(\)|all_tables|all_tab_columns|information_schema.tables|information_schema.columns
 XSS Test,%3Cscript%3Ealert%28%22[a-z]+%22%29%3C%2Fscript%3E
