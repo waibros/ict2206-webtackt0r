@@ -1,4 +1,8 @@
 attack_name,attack_query
-[SQL INJECTION] SQL statement keywords detected!,(FROM(\+|%20)dual|SELECT|NULL|ORDER(\+|%20)BY|UNION(\+|%20)(ALL)?).+(--(\+|%20)|%23)?
+[SQL INJECTION] SQL statement keywords detected,(SELECT|FROM(\+|%20)dual|INSERT|UPDATE|DROP|COLLATE|CASE|SUBSTR|SUBSTRING|NULL|ORDER(\+|%20)BY|UNION(\+|%20)(ALL)?).+(--(\+|%20)|%23)?
 [SQL INJECTION] Database enumeration,v$version|v$instance|@@version|version\(\)|all_tables|all_tab_columns|information_schema.tables|information_schema.columns
+[SQL INJECTION] Time delay attack,pg_sleep|sleep|dbms_pipe\.receive_message|WAITFOR(\+|%20)DELAY
+[SQL INJECTION] Popular conditional error method detection, 1\/0
+[SQL INJECTION] Popular SQL Functions keywords detected, ASCII|CONCAT|CHAR|HEX
+[SQL INJECTION] Bypass techniques detected, \/\*.*?\*\/|%0b
 XSS Test,%3Cscript%3Ealert%28%22[a-z]+%22%29%3C%2Fscript%3E
