@@ -24,14 +24,36 @@ def main():
         for row in csv_reader:
             regex_db.append(row)
 
-    # Loops through each log entry and match it against the regex in the regex database
-    # TO-DO: Change logic. Currently, 1 entry matching multiple regex is being printed multiple time even though only 1 entry.
+    # Format: log_entry = [triggered rule #1, triggered rule #2 ... triggered rule #3]
+    offending_entry_dict = {}
+    
     for entry in log_entries:
         for regex_query in regex_db:
             match = re.search(regex_query[1], entry)
             if match:
-                print('\x1b[0;37;41m' + regex_query[0] + ' detected!' + '\x1b[0m')
-                print(entry)
+                # check if the log_entry is in the dictionary or not, otherewise creates the key and the new list of triggered rule
+                # else, append new triggered rule to the list. 
+                if entry in offending_entry_dict:
+                    offending_entry_dict[entry].append(regex_query[0])
+                else:
+                    offending_entry_dict[entry] = [regex_query[0]]
+    
+    # https://stackoverflow.com/questions/287871/how-to-print-colored-text-to-the-terminal 
+    for key, valuelist in offending_entry_dict.items():
+        print('\x1b[0;30;43m' + 'Offending entry:' +'\x1b[0m')
+        print('{}'.format(key))
+        print('\x1b[0;30;43m' + 'Rule(s) triggered:' +'\x1b[0m')
+        for value in valuelist:
+            print(value)
+        print('-'*200)
+
+    # OLD (for reference. To be removed)
+    # for entry in log_entries:
+    #     for regex_query in regex_db:
+    #         match = re.search(regex_query[1], entry)
+    #         if match:
+    #             print('\x1b[0;37;41m' + regex_query[0] + ' detected!' + '\x1b[0m')
+    #             print(entry)
 
 def folder_input(log_input):
     """
