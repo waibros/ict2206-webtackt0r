@@ -1,4 +1,5 @@
 import re, csv, sys, os
+# from jinja2 import Template
 
 def main():
 
@@ -38,6 +39,8 @@ def main():
                 else:
                     offending_entry_dict[entry] = [regex_query[0]]
     
+    # html_report(offending_entry_dict)
+
     # https://stackoverflow.com/questions/287871/how-to-print-colored-text-to-the-terminal 
     for key, valuelist in offending_entry_dict.items():
         print('\x1b[0;30;43m' + 'Offending entry:' +'\x1b[0m')
@@ -45,15 +48,7 @@ def main():
         print('\x1b[0;30;43m' + 'Rule(s) triggered:' +'\x1b[0m')
         for value in valuelist:
             print(value)
-        print('-'*200)
-
-    # OLD (for reference. To be removed)
-    # for entry in log_entries:
-    #     for regex_query in regex_db:
-    #         match = re.search(regex_query[1], entry)
-    #         if match:
-    #             print('\x1b[0;37;41m' + regex_query[0] + ' detected!' + '\x1b[0m')
-    #             print(entry)
+        print('-'*100)
 
 def folder_input(log_input):
     """
@@ -76,6 +71,55 @@ def folder_input(log_input):
                     main_log_entries.append(entry)
     
     return main_log_entries
+
+def html_report(dict_input):
+    html_string = '''
+    <html>
+        <head>
+        <title>Bootstrap Example</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        </head>
+        <body>
+            <div class="container-fluid">
+            <br>
+            <br>
+            <h1 class="text-center">Webtackt0r Web Attacks report</h1>
+            <br>
+            <br>
+            <table class="table table-dark table-bordered">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-3">Rule triggered</th>
+                    <th class="col-9">Log entry</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key,valuelist in entries_dict.items() %}
+                    <tr class="d-flex"> 
+                        <td class="col-3">
+                            {% for value in valuelist %}
+                                <li>{{ value }}</li>
+                                <br>
+                            {% endfor %}
+                        </td>        
+                        <td class="col-9">{{ key }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+            </div>
+        </body>
+    </html>'''
+
+    j2_template = Template(html_string)
+    f = open('report.html','w')
+    f.write(j2_template.render(entries_dict=dict_input))
+    f.close()
 
 if __name__ == '__main__':
     main()
