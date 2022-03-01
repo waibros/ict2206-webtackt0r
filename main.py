@@ -1,5 +1,6 @@
 import re, csv, sys, os
-# from jinja2 import Template
+from jinja2 import Template
+import time
 
 def main():
 
@@ -39,7 +40,9 @@ def main():
                 else:
                     offending_entry_dict[entry] = [regex_query[0]]
     
-    # html_report(offending_entry_dict)
+    date_time = time.strftime("%Y-%m-%dT%H%M%S")
+    # Uncomment this for final submission
+    # html_report(offending_entry_dict, date_time)
 
     # https://stackoverflow.com/questions/287871/how-to-print-colored-text-to-the-terminal 
     for key, valuelist in offending_entry_dict.items():
@@ -72,11 +75,11 @@ def folder_input(log_input):
     
     return main_log_entries
 
-def html_report(dict_input):
+def html_report(dict_input, date_time):
     html_string = '''
     <html>
         <head>
-        <title>Bootstrap Example</title>
+        <title>Webtackt0r report</title>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -88,10 +91,12 @@ def html_report(dict_input):
             <div class="container-fluid">
             <br>
             <br>
-            <h1 class="text-center">Webtackt0r Web Attacks report</h1>
+            <h1 class="display-1 text-center">Webtackt0r Web Attacks report</h1>
             <br>
             <br>
-            <table class="table table-dark table-bordered">
+            <h3>Report generated on {{ date_time }}</h3>
+            <br>
+            <table class="table table-striped table-dark table-bordered">
             <thead>
                 <tr class="d-flex">
                     <th class="col-3">Rule triggered</th>
@@ -107,7 +112,11 @@ def html_report(dict_input):
                                 <br>
                             {% endfor %}
                         </td>        
-                        <td class="col-9">{{ key }}</td>
+                        <td class="col-9">
+                            <p style="word-wrap:break-word">
+                                {{ key }}
+                            </p>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -117,8 +126,9 @@ def html_report(dict_input):
     </html>'''
 
     j2_template = Template(html_string)
-    f = open('report.html','w')
-    f.write(j2_template.render(entries_dict=dict_input))
+    filename = date_time + '_report.html'
+    f = open(filename,'w')
+    f.write(j2_template.render(entries_dict=dict_input, date_time=date_time))
     f.close()
 
 if __name__ == '__main__':
