@@ -23,6 +23,6 @@ attack_name,attack_query
 [XXE] XInclude attack,XInclude.+xi.+include
 [COMMAND INJECTION] Command Chaining,;|(%3B)|&|(&&)|(%26)|(%26%26)|\||(\|\|)|(%7C)|(%7C%7C)
 [COMMAND INJECTION] Inline Command Execution,(\$\()(.*)(\))|(%24%28)(.*)(%29)|`(.*)`|(%60)(.*)(%60)
-[COMMAND INJECTION] Potential Hex Encoding Bypass,\\x)|(%5Cx)
+[COMMAND INJECTION] Potential Hex Encoding Bypass,(\\x)|(%5Cx)
 [COMMAND INJECTION] IFS Space Bypass ,(\$IFS)|(\${IFS})|(IFS=)|(%24IFS)|(%24%7BIFS%7D)|(IFS%3D)
 [COMMAND INJECTION] Uninitialised Variable Bypass,(\$u)|(%24u)|(\${u})|(%24%7Bu%7D)
