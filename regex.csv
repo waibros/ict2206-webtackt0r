@@ -21,8 +21,14 @@ attack_name,attack_query
 [SSTI] Freemaker Code Execution,freemarker\.template\.utility\.Execute
 [XXE] External entity attack,ENTITY.+SYSTEM
 [XXE] XInclude attack,XInclude.+xi.+include
-[COMMAND INJECTION] Command Chaining,;|(%3B)|&|(&&)|(%26)|(%26%26)|\||(\|\|)|(%7C)|(%7C%7C)
 [COMMAND INJECTION] Inline Command Execution,(\$\()(.*)(\))|(%24%28)(.*)(%29)|`(.*)`|(%60)(.*)(%60)
 [COMMAND INJECTION] Potential Hex Encoding Bypass,\\x\)|(%5Cx)
 [COMMAND INJECTION] IFS Space Bypass ,(\$IFS)|(\${IFS})|(IFS=)|(%24IFS)|(%24%7BIFS%7D)|(IFS%3D)
 [COMMAND INJECTION] Uninitialised Variable Bypass,(\$u)|(%24u)|(\${u})|(%24%7Bu%7D)
+[LOCAL FILE INCLUSION] Directory Traversal,\.\.\/|\/etc\/passwd|file:\/\/
+[LOCAL FILE INCLUSION] Arbitrary Code Execution,\(\$\_GET\[\'cmd\'\]\)\;\?\>|input\&cmd|filter\/resource
+[LOCAL FILE INCLUSION] Possible Arbitrary Code Execution Encoded in Base64,base64_decode
+[LOCAL FILE INCLUSION] PHP Code Execution Commands detected,shell_exec|passthru\(
+[REMOTE FILE INCLUSION] Possible Loading of URL into web-server,page=http|page=www|page=HTTP|page=WWW
+[FILE UPLOAD] Masking PHP file with .jpg,\.php\.jpg
+[COMMAND INJECTION] Command Chaining,(%3B)|&|(&&)|(%26)|(%26%26)|\||(\|\|)|(%7C)|(%7C%7C)
