@@ -34,4 +34,3 @@ attack_name,attack_query
 [REMOTE FILE INCLUSION] Possible Loading of URL into web-server,page=http|page=www|page=HTTP|page=WWW
 [URL INDICATOR] Public IP address input detected possible malicious link,\b(?!(?:10\.|172\.(?:1[6-9]|2[0-9]|3[0-2])\.|192\.168\.))((?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])))\b
 [URL INDICATOR] URL input detected possible malicious link,"https?((:\/\/)|%3A%2F%2F)(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
-[test url] test if can get url,"^(https?:\/\/)?([\da-z\.-]+\.[a-z\.]{2,6}|[\d\.]+)([\/:?=&#]{1}[\da-z\.-]+)*[\/\?]?$"
