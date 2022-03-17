@@ -30,5 +30,7 @@ attack_name,attack_query
 [LOCAL FILE INCLUSION] Arbitrary Code Execution,\(\$\_GET\[\'cmd\'\]\)\;\?\>|input\&cmd|filter\/resource|cmd=
 [LOCAL FILE INCLUSION] Possible Arbitrary Code Execution Encoded in Base64,base64_decode
 [LOCAL FILE INCLUSION] PHP Code Execution Commands detected,shell_exec|passthru\(
-[REMOTE FILE INCLUSION] Possible Loading of URL into web-server,page=http|page=www|page=HTTP|page=WWW
 [FILE UPLOAD] Masking PHP file with .jpg,\.php\.jpg
+[REMOTE FILE INCLUSION] Possible Loading of URL into web-server,page=http|page=www|page=HTTP|page=WWW
+[URL INDICATOR] Public IP address input detected possible malicious link,^([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(?<!172\.(16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31))(?<!127)(?<!^10)(?<!^0)\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(?<!192\.168)(?<!172\.(16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31))\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$
+[URL INDICATOR] URL input detected possible malicious link,"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
