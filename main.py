@@ -31,7 +31,7 @@ def main():
     
     for entry in log_entries:
         for regex_query in regex_db:
-            match = re.search(regex_query[1], entry)
+            match = re.search(regex_query[1], entry, re.IGNORECASE)
             if match:
                 # check if the log_entry is in the dictionary or not, otherewise creates the key and the new list of triggered rule
                 # else, append new triggered rule to the list. 
@@ -42,7 +42,7 @@ def main():
     
     date_time = time.strftime("%Y-%m-%dT%H%M%S")
     # Uncomment this for final submission
-    # html_report(offending_entry_dict, date_time)
+    html_report(offending_entry_dict, date_time)
 
     # https://stackoverflow.com/questions/287871/how-to-print-colored-text-to-the-terminal 
     for key, valuelist in offending_entry_dict.items():
@@ -77,53 +77,58 @@ def folder_input(log_input):
 
 def html_report(dict_input, date_time):
     html_string = '''
-    <html>
-        <head>
-        <title>Webtackt0r report</title>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-            <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-        </head>
-        <body>
-            <div class="container-fluid">
-            <br>
-            <br>
-            <h1 class="display-1 text-center">Webtackt0r Web Attacks report</h1>
-            <br>
-            <br>
-            <h3>Report generated on {{ date_time }}</h3>
-            <br>
-            <table class="table table-striped table-dark table-bordered">
-            <thead>
-                <tr class="d-flex">
-                    <th class="col-3">Rule triggered</th>
-                    <th class="col-9">Log entry</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for key,valuelist in entries_dict.items() %}
-                    <tr class="d-flex"> 
-                        <td class="col-3">
-                            {% for value in valuelist %}
-                                <li>{{ value }}</li>
-                                <br>
-                            {% endfor %}
-                        </td>        
-                        <td class="col-9">
-                            <p style="word-wrap:break-word">
-                                {{ key }}
-                            </p>
-                        </td>
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <title>Hello, world!</title>
+    </head>
+    <body>
+        <br>
+        <br>
+        <h1 class="display-1 text-center">Webtackt0r Web Attacks report</h1>
+        <br>
+        <br>
+        <h3>Report generated on {{ date_time }}</h3>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-dark table-striped table-bordered" style="max-width: none; table-layout: fixed; word-wrap: break-word;">
+                <thead>
+                    <tr>
+                        <th scope="col">Rule Triggered</th>
+                        <th scope="col">Log Entry</th>
                     </tr>
-                {% endfor %}
-            </tbody>
+                </thead>
+                <tbody>
+                    {% for key,valuelist in entries_dict.items() %}
+                        <tr> 
+                            <td>
+                                {% for value in valuelist %}
+                                    <li>{{ value }}</li>
+                                    <br>
+                                {% endfor %}
+                            </td>        
+                            <td>
+                                <p>
+                                    {{ key }}
+                                </p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
-            </div>
-        </body>
-    </html>'''
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+    </html>
+    '''
 
     j2_template = Template(html_string)
     filename = date_time + '_report.html'
