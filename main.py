@@ -2,6 +2,7 @@ import re, csv, sys, os
 from jinja2 import Template
 import time
 
+DEBUG = 1
 def main():
 
     if len(sys.argv) != 2:
@@ -44,14 +45,15 @@ def main():
     # Uncomment this for final submission
     html_report(offending_entry_dict, date_time)
 
-    # https://stackoverflow.com/questions/287871/how-to-print-colored-text-to-the-terminal 
-    for key, valuelist in offending_entry_dict.items():
-        print('\x1b[0;30;43m' + 'Offending entry:' +'\x1b[0m')
-        print('{}'.format(key))
-        print('\x1b[0;30;43m' + 'Rule(s) triggered:' +'\x1b[0m')
-        for value in valuelist:
-            print(value)
-        print('-'*100)
+    if DEBUG:
+        # https://stackoverflow.com/questions/287871/how-to-print-colored-text-to-the-terminal 
+        for key, valuelist in offending_entry_dict.items():
+            print('\x1b[0;30;43m' + 'Offending entry:' +'\x1b[0m')
+            print('{}'.format(key))
+            print('\x1b[0;30;43m' + 'Rule(s) triggered:' +'\x1b[0m')
+            for value in valuelist:
+                print(value)
+            print('-'*100)
 
 def folder_input(log_input):
     """

@@ -32,6 +32,8 @@ attack_name,attack_query
 [SSTI] ASP Template Code Execution,CreateObject%28%22Wscript\.Shell%22%29\.exec
 [XXE] External entity attack,ENTITY.+SYSTEM
 [XXE] XInclude attack,XInclude.+xi.+include
+[XXE] Billion Laugh Attack (DoS),ENTITY%20(.+)%20.+\n.*&\1
+[XXE] YAML attack (DoS),&(.+).+\n.+\*\1
 [COMMAND INJECTION] Inline Command Execution,(\$\()(.*)(\))|(%24%28)(.*)(%29)|`(.*)`|(%60)(.*)(%60)
 [COMMAND INJECTION] IFS Space Bypass ,(\$IFS)|(\${IFS})|(IFS=)|(%24IFS)|(%24%7BIFS%7D)|(IFS%3D)
 [COMMAND INJECTION] Uninitialised Variable Bypass,(\$u)|(%24u)|(\${u})|(%24%7Bu%7D)
