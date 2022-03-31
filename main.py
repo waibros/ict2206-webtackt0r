@@ -1,10 +1,8 @@
-import re, csv, sys, os
+import re, csv, sys, os, time
 from jinja2 import Template
-import time
 
-DEBUG = 1
+DEBUG = 0
 def main():
-
     if len(sys.argv) != 2:
         print("Usage: python3 main.py <logfile or logfolder>")
         exit()
